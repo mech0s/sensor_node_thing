@@ -1,0 +1,29 @@
+{
+    "@context":[
+        "https://www.w3.org/2019/wot/td/v1"
+    ],
+    "@type":["Thing"],
+    "title": "SenseHatEnv",
+    "description": "A Thing that exposes pressure/temperature/humidity values",
+    "properties": {
+        "pressure":{
+            "type": "number",
+            "title": "pressure",
+            "description": "mbar",
+            "readOnly": false
+        },
+        "humidity":{
+            "type": "number",
+            "title": "humidity",
+            "description": "%",
+            "readOnly": true
+        },
+        "temperature":{
+            "type": "number",
+            "title": "temperature",
+            "description": "celsius",
+            "readOnly": true
+            
+        }
+    }
+}
