@@ -56,8 +56,8 @@ setInterval(() => {
             '0-3','4-7','blue',
             '4-7','0-3','red',
             '4-7','4-7','magenta',
-             clamp07(temperature_state - temperature_xbase()),
-             clamp07(humidity_state - humidity_ybase()),
+             clamp07(Math.floor(temperature_state) - temperature_xbase()),
+             clamp07(Math.floor(humidity_state) - humidity_ybase()) ,
             'white'
                             );
     }}, displayRefreshMs);
