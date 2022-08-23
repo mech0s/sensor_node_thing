@@ -11,6 +11,7 @@ let humidity_state = null;
 let temperature_state = null;
 let temperature_threshold = 44;
 let humidity_threshold = 31;
+let filter = 0.4;
 let temperature_xbase = () => temperature_threshold - 4;
 let humidity_ybase = () => humidity_threshold - 4;
 const clamp07 = (num) => Math.round(Math.min(Math.max(num,0),7))
@@ -46,7 +47,9 @@ servient.start().then((WoT) => {
 
 const sensehat = require('pi-sense-hat').create();
 sensehat.on("environment", ({temperature,humidity,pressure}) => 
-    {pressure_state = pressure;  humidity_state = humidity, temperature_state = temperature; }
+    {   pressure_state = pressure * filter + (1-filter) * pressure_state ;  
+        humidity_state = humidity  * filter + (1-filter) * humidity_state, 
+        temperature_state = temperature * filter + (1-filter) * temperature_state; }
 );
 
 setInterval(() => {
