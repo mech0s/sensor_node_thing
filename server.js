@@ -4,6 +4,7 @@ const Servient = require('@node-wot/core').Servient;
 const HttpServer = require('@node-wot/binding-http').HttpServer;
 const { SenseHat } = require('pi-sense-hat');
 const envTd = require("./sense_hat_env.td.json");
+const thresholdTd = require("./sense_hat_thresholds.td.json");
 
 let pressure_state = null;
 let humidity_state = null;
@@ -29,7 +30,18 @@ servient.start().then((WoT) => {
         thing.expose().then(() => {
             console.log(thing.getThingDescription().title + " ready");
         })
-    })
+    });
+    WoT.produce( thresholdTd )
+    .then((thing) => {
+        console.log("Produced " + thing.getThingDescription().title);
+        thing
+        .setPropertyReadHandler("pressure-threshold", async () => 0) // not implemented
+        .setPropertyReadHandler("humidity-threshold", async () => humidity_threshold)
+        .setPropertyReadHandler("temperature-threshold", async () => temperature_threshold);
+        thing.expose().then(() => {
+            console.log(thing.getThingDescription().title + " ready");
+        })
+    });
 });
 
 const sensehat = require('pi-sense-hat').create();

@@ -1,0 +1,29 @@
+{
+    "@context":[
+        "https://www.w3.org/2019/wot/td/v1"
+    ],
+    "@type":["Thing"],
+    "title": "SenseHatThresholds",
+    "description": "A Thing that exposes pressure/temperature/humidity low/high thresholds",
+    "properties": {
+        "pressure-threshold":{
+            "type": "number",
+            "title": "pressure threshold",
+            "description": "mbar",
+            "readOnly": false
+        },
+        "humidity-threshold":{
+            "type": "number",
+            "title": "humidity threshold",
+            "description": "%",
+            "readOnly": true
+        },
+        "temperature-threshold":{
+            "type": "number",
+            "title": "temperature threshold",
+            "description": "celsius",
+            "readOnly": true
+            
+        }
+    }
+}
